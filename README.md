@@ -1,44 +1,45 @@
-# confd
+# confd 项目
+项目基于[nacos-confd](https://github.com/nacos-group/nacos-confd)修改扩展，用于Nacos 1.2.0 增加权限控制后，拉取配置中心配置.
 
-[![Build Status](https://travis-ci.org/kelseyhightower/confd.svg?branch=master)](https://travis-ci.org/kelseyhightower/confd)
+## 新增功能
+- [x] confd新增权限认证
+- [x] confd增加yaml解析
 
-`confd` is a lightweight configuration management tool focused on:
-
-* keeping local configuration files up-to-date using data stored in [etcd](https://github.com/coreos/etcd),
-  [consul](http://consul.io), [dynamodb](http://aws.amazon.com/dynamodb/), [redis](http://redis.io),
-  [vault](https://vaultproject.io), [zookeeper](https://zookeeper.apache.org), [aws ssm parameter store](https://aws.amazon.com/ec2/systems-manager/) or env vars and processing [template resources](docs/template-resources.md).
-* reloading applications to pick up new config file changes
-
-## Community
-
-* IRC: `#confd` on Freenode
-* Mailing list: [Google Groups](https://groups.google.com/forum/#!forum/confd-users)
-* Website: [www.confd.io](http://www.confd.io)
-
-## Building
-
-Go 1.10 is required to build confd, which uses the new vendor directory.
+## 构建confd流程
+go环境准备～～～
 
 ```
 $ mkdir -p $GOPATH/src/github.com/kelseyhightower
-$ git clone https://github.com/kelseyhightower/confd.git $GOPATH/src/github.com/kelseyhightower/confd
+$ git clone https://github.com/lyln/nacos-confd.git $GOPATH/src/github.com/kelseyhightower/confd
 $ cd $GOPATH/src/github.com/kelseyhightower/confd
 $ make
 ```
 
-You should now have confd in your `bin/` directory:
+notes:
+```
+$GOPATH/src/github.com/kelseyhightower下项目重命名为confd
 
 ```
-$ ls bin/
-confd
+
+## confd权限使用
+参考配置
+/etc/confd/confd.toml
+```
+backend = "nacos"
+confdir = "/etc/confd"
+#log-level = "debug"
+namespace = "dev"
+interval = 5
+nodes = [
+  "nacos_server",
+  ]
+scheme = "http"
+watch = true
+NacosUsername = "nacos"
+NacosPassword = "nacos"
+
 ```
 
-## Getting Started
-
-Before we begin be sure to [download and install confd](docs/installation.md).
-
-* [quick start guide](docs/quick-start-guide.md)
-
-## Next steps
-
-Check out the [docs directory](docs) for more docs.
+## 其他疑惑
+欢迎共同学习探讨。
+![qr](https://lyln.oss-cn-beijing.aliyuncs.com/wx/irisloveli.jpg?230x230)
