@@ -71,6 +71,7 @@ type watchProcessor struct {
 }
 
 func WatchProcessor(config Config, stopChan, doneChan chan bool, errChan chan error) Processor {
+	log.Debug("WatchProcessor is action")
 	var wg sync.WaitGroup
 	return &watchProcessor{config, stopChan, doneChan, errChan, wg}
 }
@@ -93,6 +94,7 @@ func (p *watchProcessor) Process() {
 func (p *watchProcessor) monitorPrefix(t *TemplateResource) {
 	defer p.wg.Done()
 	keys := util.AppendPrefix(t.Prefix, t.Keys)
+	log.Debug("monitorPrefix is action")
 	for {
 		index, err := t.storeClient.WatchPrefix(t.Prefix, keys, t.lastIndex, p.stopChan)
 		if err != nil {

@@ -43,6 +43,8 @@ func main() {
 	errChan := make(chan error, 10)
 
 	var processor template.Processor
+
+	log.Info("config.Watch is", config.Watch)
 	switch {
 	case config.Watch:
 		processor = template.WatchProcessor(config.TemplateConfig, stopChan, doneChan, errChan)

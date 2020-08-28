@@ -12,6 +12,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+        yaml "gopkg.in/yaml.v2"
 
 	util "github.com/kelseyhightower/confd/util"
 	"github.com/kelseyhightower/memkv"
@@ -23,6 +24,8 @@ func newFuncMap() map[string]interface{} {
 	m["split"] = strings.Split
 	m["json"] = UnmarshalJsonObject
 	m["jsonArray"] = UnmarshalJsonArray
+	m["yaml"] = UnmarshalYamlObject
+	m["yamlArray"] = UnmarshalYamlArray
 	m["dir"] = path.Dir
 	m["map"] = CreateMap
 	m["getenv"] = Getenv
@@ -166,6 +169,18 @@ func UnmarshalJsonObject(data string) (map[string]interface{}, error) {
 func UnmarshalJsonArray(data string) ([]interface{}, error) {
 	var ret []interface{}
 	err := json.Unmarshal([]byte(data), &ret)
+	return ret, err
+}
+
+func UnmarshalYamlObject(data string) (map[string]interface{}, error) {
+	var ret map[string]interface{}
+	err := yaml.Unmarshal([]byte(data), &ret)
+	return ret, err
+}
+
+func UnmarshalYamlArray(data string) ([]interface{}, error) {
+	var ret []interface{}
+	err := yaml.Unmarshal([]byte(data), &ret)
 	return ret, err
 }
 
