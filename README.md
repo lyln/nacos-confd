@@ -42,4 +42,4 @@ NacosPassword = "nacos"
 
 ## 其他疑惑
 欢迎共同学习探讨。
-![qr](https://lyln.oss-cn-beijing.aliyuncs.com/wx/irisloveli.jpg?230x230)
+- [好奇害死猫](https://lyln.oss-cn-beijing.aliyuncs.com/wx/irisloveli.jpg)
